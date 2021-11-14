@@ -1,6 +1,4 @@
 from sqlalchemy.orm import Session
-
-#from . import models, schemas
 from database import engine
 import models, schemas
 from selenium.common.exceptions import NoSuchElementException
@@ -31,7 +29,7 @@ import platform
 import telebot
 from telebot import types
 
-bot = telebot.TeleBot('1927801847:AAEZquHVkEv5V9cUUsU_tB5st5o4BgMaGyk')
+bot = telebot.TeleBot('token')
 
 
 def init(engine):
@@ -69,14 +67,11 @@ def entrance(acc, engine):
         LOGIN_URL = "https://www.linkedin.com/login/ru?fromSignIn=true&trk=guest_homepage-basic_nav-header-signin"  # стр входа
         BUTTON_XPATH = "/html/body/div/main/div[2]/div[1]/form/div[3]/button"  # кнопка входа
         if platform.system() == 'Windows':
-            print('Windows')
             options = Options()
-            options.add_extension('C:\\Users\\Ваня\\Documents\\medframe\\develop\\extention.crx')
+            options.add_extension('C:PATH\\extention.crx')
             options.add_argument('ignore-certificate-errors')
-            driver = Chrome('C:\\Users\\Ваня\\Documents\\medframe\\develop\\chromedriver.exe', options=options)
-            print('Driver готов')
+            driver = Chrome('C:PATH\\chromedriver.exe', options=options)
         else:
-            print('nowin32')
             options = Options()
             options.add_argument('--headless')
             options.add_argument('--no-sandbox')
@@ -168,45 +163,6 @@ def parsing_unread_message(acc, driver, engine):
         df.to_sql('un_messages', engine, schema='link', if_exists='append', index=False)
         bot.send_message(-595497191 ,f"Загрузил сообщения {acc.name} в базу")
     except:
-        # print("ERROR - " + traceback.format_exc())
         bot.send_message(-595497191, f"ERROR - " + traceback.format_exc())
         bot.send_message(-595497191, f"{acc.name} потерял driver - сессию и заходит заново")
         acc.driver = entrance(acc, engine)
-
-
-
-
-def get_id(db: Session):
-    print(db.query(models.id).first())
-    return db.query(models.id).first()
-# def get_user(db: Session, user_id: int):
-#     return db.query(models.User).filter(models.User.id == user_id).first()
-#
-#
-# def get_user_by_email(db: Session, email: str):
-#     return db.query(models.User).filter(models.User.email == email).first()
-#
-#
-# def get_users(db: Session, skip: int = 0, limit: int = 100):
-#     return db.query(models.User).offset(skip).limit(limit).all()
-#
-#
-# def create_user(db: Session, user: schemas.UserCreate):
-#     fake_hashed_password = user.password + "notreallyhashed"
-#     db_user = models.User(email=user.email, hashed_password=fake_hashed_password)
-#     db.add(db_user)
-#     db.commit()
-#     db.refresh(db_user)
-#     return db_user
-#
-#
-# def get_items(db: Session, skip: int = 0, limit: int = 100):
-#     return db.query(models.Item).offset(skip).limit(limit).all()
-#
-#
-# def create_user_item(db: Session, item: schemas.ItemCreate, user_id: int):
-#     db_item = models.Item(**item.dict(), owner_id=user_id)
-#     db.add(db_item)
-#     db.commit()
-#     db.refresh(db_item)
-#     return db_item
