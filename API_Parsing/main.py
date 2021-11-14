@@ -13,7 +13,7 @@ models.Base.metadata.create_all(bind=engine)
 app = FastAPI()
 
 class worker:
-    db_string = "postgresql://postgres:sjvnfi_LFMR740@internal.cfnsbden5utu.us-east-2.rds.amazonaws.com:5432/"
+    db_string = "postgresql://"
     engine = create_engine(db_string, pool_size=10, max_overflow=20)
     acc = crud.init(engine)
     driver = crud.entrance(acc, engine)
