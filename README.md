@@ -5,4 +5,4 @@
 
 Задачи на алгоритмы (Algoritms)
 
-Парсеры (Parsing)  
+Парсеры (Parsing)
