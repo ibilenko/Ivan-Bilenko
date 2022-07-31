@@ -16,5 +16,5 @@ jobs:
           REMOTE_USER: "ubuntu"
           TARGET: "/home/ubuntu/ci"
       - name: mkdir
-        run: cd 
+        run: cd /home/ubuntu/ci
       
