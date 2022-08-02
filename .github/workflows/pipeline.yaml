@@ -15,6 +15,11 @@ jobs:
           REMOTE_HOST: "ec2-3-18-105-201.us-east-2.compute.amazonaws.com"
           REMOTE_USER: "ubuntu"
           TARGET: "/home/ubuntu/ci"
-      - name: mkdir
-        run: cd /home/ubuntu/ci
+      - name: executing remote ssh commands using ssh
+        uses: appleboy/ssh-action@master
+        with:
+          host: "ec2-3-18-105-201.us-east-2.compute.amazonaws.com"
+          username: "ubuntu"
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: whoami    
       
