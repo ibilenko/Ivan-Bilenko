@@ -21,6 +21,7 @@ jobs:
           host: "ec2-3-18-105-201.us-east-2.compute.amazonaws.com"
           username: "ubuntu"
           key: ${{ secrets.EC2_SSH_KEY }}
+          script_stop: true
           script: cd /home/ubuntu/ci; for pid in $(ps aux | grep 'python3 service_base.py' | awk '{print  $2}'); do kill $pid; done; python3 service_base.py
     
       
