@@ -1,13 +1,11 @@
-name: Push-to-EC2
+name: Dima
 on: push
 jobs:
   deploy:
     name: Push to EC2 Instance
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout the code
-        uses: actions/checkout@v1
-      - name: Deploy to my EC2 instance
+      - name: Deploy to EC2 instance
         uses: easingthemes/ssh-deploy@v2.1.5
         env:
           SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
@@ -15,7 +13,7 @@ jobs:
           REMOTE_HOST: "ec2-3-18-105-201.us-east-2.compute.amazonaws.com"
           REMOTE_USER: "ubuntu"
           TARGET: "/home/ubuntu/ci"
-      - name: kill last processes
+      - name: kill last proc
         uses: appleboy/ssh-action@master
         with:
           host: "ec2-3-18-105-201.us-east-2.compute.amazonaws.com"
