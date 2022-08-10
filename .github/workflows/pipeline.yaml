@@ -1,8 +1,8 @@
-name: Dima
+name: EC2
 on: push
 jobs:
   deploy:
-    name: Push to EC2 Instance
+    name: Dima
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to EC2 instance
