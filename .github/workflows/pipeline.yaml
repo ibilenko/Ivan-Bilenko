@@ -22,6 +22,6 @@ jobs:
           username: "ubuntu"
           key: ${{ secrets.EC2_SSH_KEY }}
           script_stop: true
-          script: cd /home/ubuntu/ci; for pid in $(ps aux | grep 'python3 service_base.py' | awk '{print  $2}'); do kill $pid; done; python3 service_base.py
+          script: cd ci; python3 service_base.py
     
       
