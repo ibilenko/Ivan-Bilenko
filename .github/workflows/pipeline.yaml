@@ -21,7 +21,6 @@ jobs:
           host: "ec2-3-18-105-201.us-east-2.compute.amazonaws.com"
           username: "ubuntu"
           key: ${{ secrets.EC2_SSH_KEY }}
-          script_stop: true
-          script: cd ci; python3 service_base.py
+          script: cd ci; python3 infinity.py
     
       
