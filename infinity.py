@@ -1,3 +1,1 @@
-cnt = 0
-while True:
-  cnt += 1
+1 / 0
