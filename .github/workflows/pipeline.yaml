@@ -15,12 +15,19 @@ jobs:
           REMOTE_HOST: "ec2-3-18-105-201.us-east-2.compute.amazonaws.com"
           REMOTE_USER: "ubuntu"
           TARGET: "/home/ubuntu/ci"
-      - name: executing remote ssh commands using ssh
+      - name: kill last processes
         uses: appleboy/ssh-action@master
         with:
           host: "ec2-3-18-105-201.us-east-2.compute.amazonaws.com"
           username: "ubuntu"
           key: ${{ secrets.EC2_SSH_KEY }}
-          script: cd ci; for pid in $(ps aux | grep 'python3 infinity.py$' | awk '{print  $2}'); do kill $pid; done; python3 infinity.py 
+          script: for pid in $(ps aux | grep 'python3 infinity.py$' | awk '{print  $2}'); do kill $pid; done;
+      - name: run
+        uses: appleboy/ssh-action@master
+        with:
+          host: "ec2-3-18-105-201.us-east-2.compute.amazonaws.com"
+          username: "ubuntu"
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: cd ci; python3 infinity.py;
     
       
