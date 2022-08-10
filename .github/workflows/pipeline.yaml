@@ -21,6 +21,6 @@ jobs:
           host: "ec2-3-18-105-201.us-east-2.compute.amazonaws.com"
           username: "ubuntu"
           key: ${{ secrets.EC2_SSH_KEY }}
-          script: for pid in $(ps aux | grep 'python3 infinity.py$' | awk '{print  $2}'); do echo $pid; done; cd ci; python3 infinity.py
+          script: for pid in $(ps aux | grep 'python3 infinity.py$' | awk '{print  $2}'); do kill $pid; done; cd ci; python3 infinity.py
     
       
