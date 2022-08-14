@@ -5,6 +5,9 @@ jobs:
     name: Dima
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout the code
+        uses: actions/checkout@v1
+        
       - name: Deploy to EC2 instance
         uses: easingthemes/ssh-deploy@v2.1.5
         env:
@@ -13,6 +16,7 @@ jobs:
           REMOTE_HOST: "ec2-3-18-105-201.us-east-2.compute.amazonaws.com"
           REMOTE_USER: "ubuntu"
           TARGET: "/home/ubuntu/ci"
+          
       - name: kill last proc
         uses: appleboy/ssh-action@master
         with:
